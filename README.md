@@ -87,6 +87,41 @@ Launch the virtual machines and wait for them to be in the running state. Name o
 #### Connect via SSH
 Connect to each machine via SSH (e.g., MobaXterm) to proceed with the Kubernetes setup.
 
+
+## Setting Up Master and Worker Nodes
+
+### 1. Update the Package List
+This command updates the list of available packages and their versions, ensuring you have the latest information on the newest versions and their dependencies.
+
+### 2. Install Docker
+This command installs Docker, a containerization platform, which is essential for running Kubernetes containers. The `-y` flag automatically confirms the installation.
+
+### 3. Set Permissions for Docker
+This command changes the permissions of the Docker socket file, allowing non-root users to run Docker commands.
+
+### 4. Install Transport Packages and Certificates
+This command installs packages necessary for allowing the `apt` package manager to use HTTPS for retrieving packages. It also installs `curl` for downloading files and `gnupg` for handling encryption and signing.
+
+### 5. Create a Directory for the Kubernetes Keyring
+This command creates the `/etc/apt/keyrings` directory with permissions set to `755`, which is required for storing the Kubernetes signing key.
+
+### 6. Download and Store the Kubernetes Signing Key
+This command downloads the Kubernetes signing key and converts it to the GPG format, saving it in the `/etc/apt/keyrings/kubernetes-apt-keyring.gpg` file. This key is used to verify the authenticity of Kubernetes packages.
+
+### 7. Add the Kubernetes Repository to the Package List
+This command adds the Kubernetes repository to the list of sources from which `apt` can install packages. It specifies that packages from this repository should be verified using the previously downloaded GPG key.
+
+### 8. Update the Package List Again
+This command refreshes the package list to include the newly added Kubernetes repository.
+
+### 9. Install Kubernetes Components
+This command installs specific versions of `kubeadm`, `kubelet`, and `kubectl`, which are essential components for setting up and managing a Kubernetes cluster. The `-y` flag confirms the installation automatically.
+
+
+
+This version includes only the essential information without any extra details.
+
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
